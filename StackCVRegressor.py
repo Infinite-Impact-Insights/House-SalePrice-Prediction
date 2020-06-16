@@ -81,23 +81,17 @@ xgbclassifier = xgb.XGBRegressor(colsample_bytree=0.7,
                  subsample=0.6,
                  seed=42,
                  max_features=220)
-print("1")
 xgbclassifier.fit(X_train, Y_train)
-print("2")
 
 rfclassifier = RandomForestRegressor(n_estimators = 1000, max_features=220)
 rfclassifier.fit(X_train, Y_train)
-print("3")
+
 stack_gen = StackingCVRegressor(regressors=(xgbclassifier,rfclassifier),
                                 meta_regressor=xgbclassifier,
                                 use_features_in_secondary=True)
-print("4")
-
 stack_gen.fit(X_train,Y_train)
+
+
 print("Score rf",rfclassifier.score(X_test, Y_test))
 print("Score xgb",xgbclassifier.score(X_test, Y_test))
 print("Score stack",stack_gen.score(X_test, Y_test))
-# res=xgbclassifier.predict(dataset[1460:,2:276])
-# print(res)
-# pred=pd.DataFrame(res)
-# pred.to_csv('prediction_results4.csv',sep=',')
