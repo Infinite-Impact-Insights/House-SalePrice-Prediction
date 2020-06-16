@@ -33,6 +33,7 @@ for column in train_df.columns:
     train_df[column].fillna(train_df[column].mode()[0], inplace=True)
 for column in test_df.columns:
     test_df[column].fillna(test_df[column].mode()[0], inplace=True)
+    
 wholeDataset=pd.concat([train_df,test_df],ignore_index=True)
 wholeDataset.drop(['PoolQC'],axis=1, inplace=True)
 wholeDataset.drop(['Fence'],axis=1, inplace=True)
@@ -91,34 +92,4 @@ for feat in range(10,276,10):
     scoreArr=scoreArr.append({'Max Features':feat,'Max depth':'null','Training Score':classifier.score(X_train, Y_train),'Testing Score':(cscore/5)},ignore_index=True)
       
 scoreArr.to_csv('allScore6.csv')    
-# test_df.to_csv("lessee2.csv",sep=',')
-# train_df.to_csv("trainls2.csv",sep=',')
-
-# dataset=wholeDataset.values
-#  
-# print(dataset.shape)
-#   
-# X = dataset[0:1460,2:276]
-# Y = trainDataset['SalePrice']
-# classifier = xgb.XGBRegressor(colsample_bytree=0.7,
-#                  gamma=0,
-#                  min_child_weight=1.5,
-#                  n_estimators=10000,                                                                    
-#                  reg_alpha=0.75,
-#                  reg_lambda=0.45,
-#                  subsample=0.6,
-#                  seed=42,
-#                  max_features=210)
-#           
-# classifier.fit(X, Y)
-# print("Score",classifier.score(X, Y))
-# res=classifier.predict(dataset[1460:,2:276])
-# print(res)
-
-# testset=test_df.values
-# res=classifier.predict(testset[:,2:])
-# print(res)
-# pred=pd.DataFrame(res)
-# pred.to_csv('prediction_results4.csv',sep=',')
-
 
