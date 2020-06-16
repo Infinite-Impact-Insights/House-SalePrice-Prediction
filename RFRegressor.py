@@ -27,10 +27,6 @@ test_df=pd.DataFrame(testDataset)
 
 train_df.drop(['SalePrice'],axis=1, inplace=True)
 
-
-# for column in wholeDataset.columns:
-#     wholeDataset[column].fillna(wholeDataset[column].mode()[0], inplace=True)
-
 for column in train_df.columns:
     train_df[column].fillna(train_df[column].mode()[0], inplace=True)
 for column in test_df.columns:
@@ -56,31 +52,6 @@ for tit in title:
     wholeDataset.drop([tit,'MS int'], axis=1, inplace=True)
     for i in range(0,int(maxplus)):
         wholeDataset.rename(columns={i:str(tit)+" "+str(i)},inplace=True)
-
-
-# for f in title:
-#     train_df['MS int']=labelencoder.fit_transform(train_df[f])
-#     enc = OneHotEncoder(handle_unknown='ignore')
-#     enc_df=pd.DataFrame(enc.fit_transform(train_df[['MS int']]).toarray())
-#     train_df= train_df.join(enc_df)
-#     max=train_df['MS int'].max()
-#     maxplus=max+1
-#     train_df.drop([f,'MS int'], axis=1, inplace=True)
-#     for i in range(0,int(maxplus)):
-#         train_df.rename(columns={i:str(f)+" "+str(i)},inplace=True)
-#          
-# for t in title:
-#     test_df['MS int']=labelencoder.fit_transform(test_df[t])
-#     enc = OneHotEncoder(handle_unknown='ignore')
-#     enc_df=pd.DataFrame(enc.fit_transform(test_df[['MS int']]).toarray())
-#     test_df= test_df.join(enc_df)
-#     testmax=test_df['MS int'].max()
-#     testmaxplus=testmax+1
-#     test_df.drop([t,'MS int'], axis=1, inplace=True)
-#     for i in range(0,int(testmaxplus)):
-#         test_df.rename(columns={i:str(t)+" "+str(i)},inplace=True)
- 
-# train_df=train_df.join(trainDataset['SalePrice'])
         
 print(train_df.shape)
 print(test_df.shape)
@@ -102,24 +73,4 @@ for feat in range(10,289,10):
         print(classifier.score(X_train, Y_train)," : ",feat)
      
 scoreArr.to_csv('allScore3.csv')    
-#test_df.to_csv("lessee2.csv",sep=',')
-# train_df.to_csv("trainls2.csv",sep=',')
-
-# dataset=wholeDataset.values
-# print(dataset.shape)
-# 
-# X = dataset[0:1460,2:289]
-# Y = trainDataset['SalePrice']
-# classifier = RandomForestRegressor(n_estimators = 1000, max_features=220)
-# classifier.fit(X, Y)
-# print("Score",classifier.score(X, Y))
-# res=classifier.predict(dataset[1460:,2:289])
-# print(res)
-
-# testset=test_df.values
-# res=classifier.predict(testset[:,2:])
-# print(res)
-# pred=pd.DataFrame(res)
-# pred.to_csv('prediction_results2.csv',sep=',')
-
 
